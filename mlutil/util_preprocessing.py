@@ -3,6 +3,31 @@
 import pandas as pd
 import numpy as np
 
+from sklearn.preprocessing import StandardScaler
+
+
+def standarize(train, test):
+    """ Standarize the dataset.
+
+    Fit a StandardScaler with the training set then applies the same transformation
+    on both the training and test set. Return scaled training and test set.
+    
+    Parameters
+    ----------
+    train: array-like, shape (nb_samples, nb_features)
+        The training set data.
+
+    test: array-like, shape (nb_samples, nb_features)
+        The test set data.
+    """
+
+    scaler = StandardScaler()
+    scaler.fit(train)
+    scaled_train = scaler.transform(train)
+    scaled_test = scaler.transform(test)
+
+    return scaler, scaled_train, scaled_test
+
 
 def generate_time_series(df, lookback_step=2):
     """ Generate time-series dataset based on give dataset.
@@ -35,7 +60,6 @@ def generate_time_series(df, lookback_step=2):
     """
 
     target_col = df.columns[-1]
-    nb_feature = len(df.columns)
     processed_cols = df.columns
     data = df.as_matrix()
 
