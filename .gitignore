@@ -1,0 +1,13 @@
+# system
+.DS_Store
+
+# editors
+.idea
+.editorconfig
+
+# python
+*.pyc
+
+# binary, data
+*.mat
+*.npy
